@@ -1,5 +1,3 @@
-
-
 <p style="font-family:Arial;font-size:28px;text-align:center; color:red" id="uns">
   Unsupported browser
 </p>
@@ -100,7 +98,7 @@ var hiddenElement = document.createElement('a');
 
 hiddenElement.href = 'data:attachment/text,' + encodeURI(document.getElementById('output').value);
 
-hiddenElement.download = document.getElementById('filename') + document.getElementById('format').value;
+hiddenElement.download = document.getElementById('filename').value + document.getElementById('format').value;
 hiddenElement.click();
 }
 document.getElementById("run").onclick = function() { if (document.getElementById('format').value == ".html" || document.getElementById('format').value == ".svg" || document.getElementById('format').value == ".js" ){
