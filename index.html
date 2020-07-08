@@ -21,7 +21,7 @@
 body{
 background-color:#c0c0c0;  
 }
-textarea {
+#output {
   outline: 0px solid transparent;
   resize: none;
   border-style: ridge;
@@ -58,7 +58,7 @@ Open document: <input type="file" id="myFile" accept="text/plain, text/svg, text
 </p>
 <hr>
 <p style="text-align:center">
-<textarea style="width:75%;height:500px;font-family:Arial;padding:10px" id="output"></textarea>
+<div contenteditable="true" style="width:75%;height:500px;font-family:Arial;padding:10px" id="output"></div>
 </p>
 <p style="text-align:center">
   <input type="text" id="filename" placeholder="Enter file name">
@@ -86,7 +86,7 @@ input.addEventListener("change", function () {
     var reader = new FileReader();
     
     reader.addEventListener('load', function (e) {
-      output.textContent = e.target.result;
+      output.innerHTML = e.target.result;
     });
     
     reader.readAsBinaryString(myFile);
@@ -96,21 +96,21 @@ document.getElementById("dnl_href").onclick = function(){
 
 var hiddenElement = document.createElement('a');
 
-hiddenElement.href = 'data:attachment/text,' + encodeURI(document.getElementById('output').value);
+hiddenElement.href = 'data:attachment/text,' + encodeURI(document.getElementById('output').innerHTML);
 
 hiddenElement.download = document.getElementById('filename').value + document.getElementById('format').value;
 hiddenElement.click();
 }
 document.getElementById("run").onclick = function() { if (document.getElementById('format').value == ".html" || document.getElementById('format').value == ".svg" || document.getElementById('format').value == ".js" ){
   if (document.getElementById('format').value == ".html" || document.getElementById('format').value == ".svg"){
-  var txt = document.getElementById('output').value;
+  var txt = document.getElementById('output').innerHTML;
    var wo = window.open();
   wo.document.open();
   wo.document.write(txt);
   wo.document.close();
   }
     if (document.getElementById('format').value == ".js"){
-  var txt = document.getElementById('output').value;
+  var txt = document.getElementById('output').innerHTML;
    var wo = window.open();
   wo.document.open();
   wo.document.write("<body onload='");
